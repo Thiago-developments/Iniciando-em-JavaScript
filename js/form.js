@@ -20,6 +20,9 @@ adicionapaciente.addEventListener("click", function (event) {
   tabela.appendChild(pacienteTr);
 
   form.reset();
+
+  var mensagensErro = document.querySelector("#mensagens-erro");
+  mensagensErro.innerHTML = "" ;
 });
 
 function obtemPacienteDoFormulario(form) {
@@ -57,6 +60,8 @@ function montaTd(dado, classe) {
 
 function exibeMensagensDeErro(erros) {
   let ul = document.querySelector("#mensagens-erro");
+  ul.innerHTML = "" ;
+
   erros.forEach(function (erro) {
     let li = document.createElement("li");
     li.textContent = erro;
@@ -67,13 +72,29 @@ function exibeMensagensDeErro(erros) {
 function validaPaciente(paciente) {
   var erros = [];
 
+  if (paciente.nome.length == 0) {
+    erros.push("O nome deve ser preenchido");
+  }
+  if (paciente.peso.length == 0) {
+    erros.push("O peso deve ser preenchido");
+  }
+  if (paciente.altura.length == 0) {
+    erros.push("A altura deve ser preenchida");
+  }
+  if (paciente.gordura.length == 0) {
+    erros.push("O percentual de gordura deve ser preenchido");
+  }
   if (!validaPeso(paciente.peso)) {
     erros.push("Peso inválido");
   }
   if (!validaAltura(paciente.altura)) {
     erros.push("Altura inválida");
   }
-
+  if (!validaGordura(paciente.gordura)) {
+    erros.push("Percentual de gordura inválido")
+  }
 
   return erros;
 }
+
+

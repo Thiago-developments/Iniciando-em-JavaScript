@@ -2,7 +2,7 @@
 //textContent manipula especificamente o conteúdo buscando ou inserindo-o
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparececida Nutricionista";
-const pacientes = document.querySelectorAll(".paciente");
+var pacientes = document.querySelectorAll(".paciente");
 
 for (let i = 0; i < pacientes.length; i++) {
   
@@ -47,6 +47,14 @@ function validaAltura(altura) {
   if (altura > 0 && altura < 3) {
     return true;
   } else {
+    return false;
+  }
+}
+
+function validaGordura(gordura){
+  if (gordura > 0 || gordura <= 90) {
+    return true;
+  }else{
     return false;
   }
 }
