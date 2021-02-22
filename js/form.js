@@ -3,27 +3,30 @@ adicionapaciente.addEventListener("click", function (event) {
   event.preventDefault();
 
   var form = document.querySelector("#form-adiciona");
-
   var paciente = obtemPacienteDoFormulario(form);
-
-  var pacienteTr = montaTr(paciente);
-
   var erros = validaPaciente(paciente);
+  
   console.log(erros);
+  
   if (erros.length > 0) {
     exibeMensagensDeErro(erros);
     return;
   }
 
-  var tabela = document.querySelector("#tabela-pacientes");
-
-  tabela.appendChild(pacienteTr);
+  adicionaPacienteNaTabela(paciente);
 
   form.reset();
 
   var mensagensErro = document.querySelector("#mensagens-erro");
-  mensagensErro.innerHTML = "" ;
+  mensagensErro.innerHTML = "";
 });
+
+function adicionaPacienteNaTabela(paciente) {
+  
+  var pacienteTr = montaTr(paciente);
+  var tabela = document.querySelector("#tabela-pacientes");
+  tabela.appendChild(pacienteTr);
+}
 
 function obtemPacienteDoFormulario(form) {
   var paciente = {
@@ -60,7 +63,7 @@ function montaTd(dado, classe) {
 
 function exibeMensagensDeErro(erros) {
   let ul = document.querySelector("#mensagens-erro");
-  ul.innerHTML = "" ;
+  ul.innerHTML = "";
 
   erros.forEach(function (erro) {
     let li = document.createElement("li");
@@ -91,10 +94,8 @@ function validaPaciente(paciente) {
     erros.push("Altura inválida");
   }
   if (!validaGordura(paciente.gordura)) {
-    erros.push("Percentual de gordura inválido")
+    erros.push("Percentual de gordura inválido");
   }
 
   return erros;
 }
-
-
